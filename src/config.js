@@ -124,7 +124,7 @@ export const siteConfig = {
     sectionTitle: "Soporte Iphone Fast",
     sectionDescription:
       "Nuestros expertos están disponibles para consultas personalizadas, soporte técnico y reservas premium a través de WhatsApp.",
-    whatsappCtaText: "Contactar directamente por WhatsApp",
+    whatsappCtaText: "Contactanos",
   },
 
   // Benefits Bar

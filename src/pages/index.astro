@@ -4,19 +4,41 @@ import { siteConfig } from "../config";
 ---
 
 <Layout>
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="container hero-grid">
-      <div class="hero-content">
-        <span class="badge">{siteConfig.hero.badge}</span>
-        <h1>{siteConfig.hero.title}</h1>
-        <p class="subtitle">{siteConfig.hero.subtitle}</p>
-        <div class="hero-actions">
+  <!-- ─── Hero Section ─────────────────────────────────────────── -->
+  <section class="pt-[calc(80px+4rem)] pb-24 bg-[#1c1c1e] text-[#faf7f9]">
+    <div
+      class="max-w-[1200px] mx-auto px-4 lg:px-8 grid grid-cols-1 lg:grid-cols-2 items-center gap-16 text-center lg:text-left"
+    >
+      <!-- Content -->
+      <div class="max-w-[540px] mx-auto lg:mx-0">
+        <span
+          class="border border-[#faf7f9] text-[#faf7f9] px-3 py-1 rounded-full text-[0.625rem] uppercase tracking-[0.1em] font-bold mb-8 inline-block"
+        >
+          {siteConfig.hero.badge}
+        </span>
+
+        <h1
+          class="text-[clamp(3rem,8vw,4.5rem)] leading-[1.1] font-bold tracking-[-0.04em] mb-8 text-[#faf7f9]"
+        >
+          {siteConfig.hero.title}
+        </h1>
+
+        <p class="text-lg leading-relaxed text-white/70 mb-12">
+          {siteConfig.hero.subtitle}
+        </p>
+
+        <div class="flex gap-6 justify-center lg:justify-start flex-wrap">
           {
             siteConfig.hero.ctas.map((cta) => (
               <a
                 href={cta.href}
-                class={`btn ${cta.primary ? "btn-primary" : "btn-secondary"}`}
+                style={cta.primary ? "color: #1c1c1e" : ""}
+                class={[
+                  "inline-flex items-center justify-center px-8 py-4 w-full md:w-auto rounded-xl font-semibold text-sm tracking-[0.05em] uppercase transition-all duration-300 cursor-pointer",
+                  cta.primary
+                    ? "bg-white hover:-translate-y-0.5 hover:shadow-xl hover:opacity-90"
+                    : "bg-transparent text-[#faf7f9] border border-white/30 hover:bg-white/10",
+                ].join(" ")}
               >
                 {cta.text}
               </a>
@@ -24,8 +46,10 @@ import { siteConfig } from "../config";
           }
         </div>
       </div>
-      <div class="hero-image">
-        <div class="image-wrapper">
+
+      <!-- Image -->
+      <div class="flex justify-center">
+        <div class="w-full max-w-[500px] animate-float">
           <img
             src={siteConfig.hero.image}
             alt="iPhone 16 Pro Cinematic Shot"
@@ -37,14 +61,14 @@ import { siteConfig } from "../config";
     </div>
   </section>
 
-  <!-- Trust Badges Section -->
-  <section class="trust-badges">
-    <div class="container">
-      <div class="badges-grid">
+  <!-- ─── Trust Badges ──────────────────────────────────────────── -->
+  <section class="py-24 bg-[#f2f4f6]">
+    <div class="max-w-[1200px] mx-auto px-4 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
         {
           siteConfig.trustBadges.map((badge) => (
-            <div class="badge-card">
-              <div class="badge-icon">
+            <div class="text-center flex flex-col items-center p-8 bg-white rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_15px_30px_rgba(0,0,0,0.05)]">
+              <div class="mb-6 text-[#1c1c1e]">
                 {badge.icon === "check-circle" && (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -94,8 +118,13 @@ import { siteConfig } from "../config";
                   </svg>
                 )}
               </div>
-              <h3>{badge.title}</h3>
-              <p>{badge.description}</p>
+
+              <h3 class="text-lg font-bold mb-4 text-[#1c1c1e]">
+                {badge.title}
+              </h3>
+              <p class="text-sm text-[#596065] leading-relaxed">
+                {badge.description}
+              </p>
             </div>
           ))
         }
@@ -103,46 +132,85 @@ import { siteConfig } from "../config";
     </div>
   </section>
 
-  <!-- New Arrivals Section -->
-  <section id="new-arrivals" class="product-section">
-    <div class="container">
-      <header class="section-header">
+  <!-- ─── New Arrivals ──────────────────────────────────────────── -->
+  <section id="new-arrivals" class="md:py-32 py-4">
+    <div class="max-w-[1200px] mx-auto px-4 lg:px-8">
+      <header
+        class="flex flex-col md:flex-row justify-between md:items-end items-start mb-16 gap-2 md:gap-0"
+      >
         <div>
-          <span class="section-tag">Gallery</span>
-          <h2>{siteConfig.newArrivals.title}</h2>
+          <span
+            class="text-xs uppercase tracking-[0.2em] font-extrabold text-[#596065] block mb-4"
+            >Gallery</span
+          >
+          <h2
+            class="text-[clamp(2rem,5vw,3rem)] tracking-[-0.03em] font-bold text-[#1c1c1e] leading-[1.1]"
+          >
+            {siteConfig.newArrivals.title}
+          </h2>
         </div>
-        <a href={siteConfig.newArrivals.viewAllLink} class="view-all"
-          >View all New <span class="arrow">→</span></a
+        <a
+          href={siteConfig.newArrivals.viewAllLink}
+          class="font-bold border-b-2 border-[#1c1c1e] pb-1 text-[#1c1c1e] whitespace-nowrap"
         >
+          View all New <span>→</span>
+        </a>
       </header>
 
-      <div class="arrivals-grid">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {
           siteConfig.newArrivals.products.map((product) => (
-            <div class="product-card">
-              {product.badge && <span class="card-badge">{product.badge}</span>}
-              <div class="card-image">
-                <img src={product.image} alt={product.name} />
+            <div class="group bg-[#f2f4f6] rounded-xl p-6 relative overflow-hidden transition-all duration-300 hover:bg-[#e4e9ee] flex flex-col h-full">
+              {product.badge && (
+                <span class="absolute top-4 right-4 bg-[#1c1c1e] text-[#faf7f9] px-3 py-1 rounded-full text-[0.625rem] font-extrabold z-10">
+                  {product.badge}
+                </span>
+              )}
+
+              <div class="p-8 flex-1 flex items-center justify-center">
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  class="max-h-[280px] object-contain transition-transform duration-500 group-hover:scale-105"
+                />
               </div>
-              <div class="card-info">
-                <span class="product-color">{product.color}</span>
-                <h3>{product.name}</h3>
-                <p class="price">From ${product.price}</p>
-                <button class="buy-btn">BUY NOW</button>
+
+              <div class="pt-4 px-2">
+                <span class="text-xs text-[#596065] mb-2 block">
+                  {product.color}
+                </span>
+                <h3 class="text-xl font-bold mb-2 text-[#1c1c1e]">
+                  {product.name}
+                </h3>
+                <p class="font-bold mb-6">From ${product.price}</p>
+                <button class="w-full py-4 border border-[#1c1c1e] bg-transparent font-bold text-xs tracking-[0.1em] rounded-xl cursor-pointer transition-all duration-300 hover:bg-[#1c1c1e] hover:text-[#faf7f9]">
+                  BUY NOW
+                </button>
               </div>
             </div>
           ))
         }
 
-        <div class="editorial-card">
-          <div class="editorial-content">
-            <h3>{siteConfig.newArrivals.editorial.title}</h3>
-            <p>{siteConfig.newArrivals.editorial.description}</p>
+        <!-- Editorial Card -->
+        <div
+          class="bg-[#1c1c1e] text-[#faf7f9] rounded-xl flex flex-col overflow-hidden"
+        >
+          <div class="p-12">
+            <h3
+              class="text-white text-[2.25rem] leading-[1.1] font-bold mb-6 max-w-[200px]"
+            >
+              {siteConfig.newArrivals.editorial.title}
+            </h3>
+            <p class="text-sm opacity-70 leading-relaxed">
+              {siteConfig.newArrivals.editorial.description}
+            </p>
           </div>
-          <div class="editorial-image">
+          <div class="flex-1 flex items-end justify-center overflow-hidden">
             <img
               src={siteConfig.newArrivals.editorial.image}
               alt="Editorial shot"
+              class="w-full object-contain block"
+              style="transform: translate(7px, -25px); scale: 1.5;"
             />
           </div>
         </div>
@@ -150,45 +218,80 @@ import { siteConfig } from "../config";
     </div>
   </section>
 
-  <!-- Pre-Owned Section -->
-  <section id="pre-owned" class="product-section pre-owned">
-    <div class="container">
-      <header class="section-header">
+  <!-- ─── Pre-Owned ─────────────────────────────────────────────── -->
+  <section id="pre-owned" class="md:py-32 py-4 bg-[#f9f9fb]">
+    <div class="max-w-[1200px] mx-auto px-4 lg:px-8">
+      <header
+        class="flex flex-col md:flex-row justify-between md:items-end items-start gap-2 md:gap-0 mb-16"
+      >
         <div>
-          <span class="section-tag">Curated</span>
-          <h2>{siteConfig.preOwned.title}</h2>
+          <span
+            class="text-xs uppercase tracking-[0.2em] font-extrabold text-[#596065] block mb-4"
+            >Curated</span
+          >
+          <h2
+            class="text-[clamp(2rem,5vw,3rem)] tracking-[-0.03em] font-bold text-[#1c1c1e] leading-[1.1]"
+          >
+            {siteConfig.preOwned.title}
+          </h2>
         </div>
-        <span class="condition-badge">{siteConfig.preOwned.filterLabel}</span>
+        <span
+          class="text-xs font-bold text-[#596065] px-4 py-2 bg-[#ebeef2] rounded-full"
+        >
+          {siteConfig.preOwned.filterLabel}
+        </span>
       </header>
 
-      <div class="preowned-grid">
-        <div class="spotlight-card">
-          <div class="spotlight-info">
-            <h3>{siteConfig.preOwned.spotlight.name}</h3>
-            <p class="description">
+      <div class="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-8">
+        <!-- Spotlight Card -->
+        <div
+          class="bg-[#f2f4f6] rounded-xl grid grid-cols-1 md:grid-cols-2 overflow-hidden"
+        >
+          <div class="p-12 lg:p-20 flex flex-col justify-center">
+            <h3
+              class="text-[2.5rem] leading-[1.1] font-bold mb-6 text-[#1c1c1e]"
+            >
+              {siteConfig.preOwned.spotlight.name}
+            </h3>
+            <p class="text-base text-[#596065] leading-relaxed mb-8">
               {siteConfig.preOwned.spotlight.description}
             </p>
-            <p class="price">${siteConfig.preOwned.spotlight.price}</p>
-            <button class="btn btn-primary">ADD TO COLLECTION</button>
+            <p class="text-2xl font-bold mb-12">
+              ${siteConfig.preOwned.spotlight.price}
+            </p>
+            <button
+              class="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-[#1c1c1e] text-[#faf7f9] font-semibold text-sm tracking-[0.05em] uppercase border-none cursor-pointer transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:opacity-90"
+            >
+              ADD TO COLLECTION
+            </button>
           </div>
-          <div class="spotlight-image">
+          <div class="flex items-center justify-center overflow-hidden p-8">
             <img
               src={siteConfig.preOwned.spotlight.image}
               alt={siteConfig.preOwned.spotlight.name}
+              class="max-h-full w-auto object-contain"
+              style="filter: drop-shadow(0 20px 40px rgba(0,0,0,0.1));"
             />
           </div>
         </div>
 
-        <div class="secondary-products">
+        <!-- Secondary Products -->
+        <div class="flex flex-col gap-8 h-full">
           {
             siteConfig.preOwned.products.map((product) => (
-              <div class="product-card mini">
-                <div class="card-image">
-                  <img src={product.image} alt={product.name} />
+              <div class="bg-[#f2f4f6] rounded-xl p-6 flex flex-row items-center gap-6 transition-all duration-300 hover:bg-[#e4e9ee] flex-1">
+                <div class="w-[100px] h-[100px] shrink-0 flex items-center justify-center">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    class="max-h-[80px] object-contain"
+                  />
                 </div>
-                <div class="card-info">
-                  <h3>{product.name}</h3>
-                  <p class="price">${product.price}</p>
+                <div>
+                  <h3 class="text-xl font-bold mb-2 text-[#1c1c1e]">
+                    {product.name}
+                  </h3>
+                  <p class="font-bold">${product.price}</p>
                 </div>
               </div>
             ))
@@ -198,43 +301,60 @@ import { siteConfig } from "../config";
     </div>
   </section>
 
-  <!-- WhatsApp Contact Section -->
-  <section id="support" class="contact-section">
-    <div class="container">
-      <div class="contact-card">
-        <div class="contact-info">
-          <span class="section-tag">Personal Service</span>
-          <h2>{siteConfig.contact.sectionTitle}</h2>
-          <p>{siteConfig.contact.sectionDescription}</p>
+  <!-- ─── Contact / WhatsApp ────────────────────────────────────── -->
+  <section id="support" class="md:py-32 py-4 bg-[#f2f4f6]">
+    <div class="max-w-[1200px] mx-auto px-4 lg:px-8">
+      <div
+        class="bg-white rounded-xl p-12 md:p-20 text-center max-w-[900px] mx-auto"
+      >
+        <span
+          class="text-xs uppercase tracking-[0.2em] font-extrabold text-[#596065] block mb-4"
+        >
+          Personal Service
+        </span>
+        <h2
+          class="md:text-[3rem] text-[2rem] leading-[1.1] font-bold mb-6 text-[#1c1c1e]"
+        >
+          {siteConfig.contact.sectionTitle}
+        </h2>
+        <p class="text-lg text-[#596065] mb-16 max-w-[600px] mx-auto">
+          {siteConfig.contact.sectionDescription}
+        </p>
 
-          <div class="contact-methods">
-            <a
-              href={`https://wa.me/${siteConfig.whatsappNumber.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(siteConfig.whatsappMessage)}`}
-              class="whatsapp-btn"
-              target="_blank"
-              rel="noopener noreferrer"
+        <div class="flex flex-col items-center gap-16">
+          <a
+            href={`https://wa.me/${siteConfig.whatsappNumber.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(siteConfig.whatsappMessage)}`}
+            class="inline-flex items-center gap-4 bg-[#25d366] px-12 py-6 rounded-xl font-bold transition-all duration-300 hover:scale-105 hover:shadow-[0_15px_30px_rgba(37,211,102,0.2)]"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="#1c1c1e"
+              xmlns="http://www.w3.org/2000/svg"
             >
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="white"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.414 0 .004 5.408 0 12.044c0 2.123.555 4.191 1.608 6.01L0 24l6.117-1.605a11.803 11.803 0 0 0 5.925 1.61h.005c6.632 0 12.042-5.408 12.047-12.044a11.8 11.8 0 0 0-3.522-8.498"
-                ></path>
-              </svg>
-              {siteConfig.contact.whatsappCtaText}
-            </a>
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.414 0 .004 5.408 0 12.044c0 2.123.555 4.191 1.608 6.01L0 24l6.117-1.605a11.803 11.803 0 0 0 5.925 1.61h.005c6.632 0 12.042-5.408 12.047-12.044a11.8 11.8 0 0 0-3.522-8.498"
+              ></path>
+            </svg>
+            {siteConfig.contact.whatsappCtaText}
+          </a>
 
-            <div class="personal-consultation">
-              <p><strong>Visitanos en</strong></p>
-              <p>{siteConfig.address}</p>
-              <p>
-                <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
-              </p>
-            </div>
+          <div
+            class="pt-12 border-t border-[#f2f4f6] w-full flex flex-col gap-2 items-center"
+          >
+            <p class="font-bold text-[#1c1c1e]">Visitanos en</p>
+            <p class="text-[#596065]">{siteConfig.address}</p>
+            <p>
+              <a
+                href={`mailto:${siteConfig.email}`}
+                class="font-bold text-[#1c1c1e]"
+              >
+                {siteConfig.email}
+              </a>
+            </p>
           </div>
         </div>
       </div>
@@ -243,80 +363,6 @@ import { siteConfig } from "../config";
 </Layout>
 
 <style>
-  /* Hero Section */
-  .hero {
-    padding-top: calc(var(--nav-height) + 4rem);
-    padding-bottom: 6rem;
-    background: var(--primary);
-    color: var(--on-primary);
-  }
-
-  .hero-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: 4rem;
-  }
-
-  .hero-content {
-    max-width: 540px;
-  }
-
-  .hero-content .badge {
-    border: 1px solid var(--on-primary);
-    color: var(--on-primary);
-    padding: 0.25rem 0.75rem;
-    border-radius: 50px;
-    font-size: 0.625rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-weight: 700;
-    margin-bottom: 2rem;
-    display: inline-block;
-  }
-
-  .hero-content h1 {
-    font-size: clamp(3rem, 8vw, 4.5rem);
-    letter-spacing: -0.04em;
-    margin-bottom: 2rem;
-    color: var(--on-primary);
-  }
-
-  .hero-content .subtitle {
-    font-size: 1.125rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 3rem;
-  }
-
-  .hero-actions {
-    display: flex;
-    gap: 1.5rem;
-  }
-
-  .hero-actions .btn-primary {
-    background-color: var(--surface-container-lowest);
-    color: var(--primary);
-  }
-
-  .hero-actions .btn-secondary {
-    color: var(--on-primary);
-    border-color: rgba(255, 255, 255, 0.3);
-  }
-
-  .hero-image {
-    display: flex;
-    justify-content: center;
-    position: relative;
-  }
-
-  .image-wrapper {
-    width: 100%;
-    max-width: 500px;
-    position: relative;
-    animation: float 6s ease-in-out infinite;
-  }
-
   @keyframes float {
     0%,
     100% {
@@ -326,408 +372,7 @@ import { siteConfig } from "../config";
       transform: translateY(-20px);
     }
   }
-
-  /* Trust Badges */
-  .trust-badges {
-    padding: 6rem 0;
-    background-color: var(--surface-container-low);
-  }
-
-  .badges-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 3rem;
-  }
-
-  .badge-card {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2rem;
-    background-color: var(--surface-container-lowest);
-    border-radius: var(--roundness);
-    transition: all 0.3s ease;
-  }
-
-  .badge-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05);
-  }
-
-  .badge-icon {
-    margin-bottom: 1.5rem;
-    color: var(--primary);
-  }
-
-  .badge-card h3 {
-    font-size: 1.125rem;
-    margin-bottom: 1rem;
-  }
-
-  .badge-card p {
-    font-size: 0.875rem;
-    color: var(--on-surface-variant);
-    line-height: 1.5;
-  }
-
-  /* Product Sections */
-  .product-section {
-    padding: 8rem 0;
-  }
-
-  .section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 4rem;
-  }
-
-  .section-tag {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    font-weight: 800;
-    color: var(--on-surface-variant);
-    display: block;
-    margin-bottom: 1rem;
-  }
-
-  .section-header h2 {
-    font-size: clamp(2rem, 5vw, 3rem);
-    letter-spacing: -0.03em;
-  }
-
-  .view-all {
-    font-weight: 700;
-    border-bottom: 2px solid var(--primary);
-    padding-bottom: 4px;
-  }
-
-  .arrivals-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-  }
-
-  /* Product Cards */
-  .product-card {
-    background-color: var(--surface-container-low);
-    border-radius: var(--roundness);
-    padding: 1.5rem;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
-
-  .product-card:hover {
-    background-color: var(--surface-container-high);
-  }
-
-  .card-badge {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background-color: var(--primary);
-    color: var(--on-primary);
-    padding: 0.25rem 0.75rem;
-    border-radius: 50px;
-    font-size: 0.625rem;
-    font-weight: 800;
-    z-index: 2;
-  }
-
-  .card-image {
-    padding: 2rem;
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .card-image img {
-    max-height: 280px;
-    object-fit: contain;
-    transition: transform 0.5s ease;
-  }
-
-  .product-card:hover .card-image img {
-    transform: scale(1.05);
-  }
-
-  .card-info {
-    padding: 1rem 0.5rem;
-  }
-
-  .product-color {
-    font-size: 0.75rem;
-    color: var(--on-surface-variant);
-    margin-bottom: 0.5rem;
-    display: block;
-  }
-
-  .card-info h3 {
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .price {
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-  }
-
-  .buy-btn {
-    width: 100%;
-    padding: 1rem;
-    border: 1px solid var(--primary);
-    background: transparent;
-    font-weight: 700;
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    border-radius: var(--roundness);
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-  .buy-btn:hover {
-    background-color: var(--primary);
-    color: var(--on-primary);
-  }
-
-  /* Editorial Card */
-  .editorial-card {
-    background-color: var(--primary);
-    color: var(--on-primary);
-    border-radius: var(--roundness);
-    grid-column: span 1;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
-
-  .editorial-content {
-    padding: 3rem;
-  }
-
-  .editorial-content h3 {
-    color: white;
-    font-size: 2.25rem;
-    margin-bottom: 1.5rem;
-    max-width: 200px;
-  }
-
-  .editorial-content p {
-    font-size: 0.875rem;
-    opacity: 0.7;
-    line-height: 1.6;
-  }
-
-  .editorial-image {
-    flex: 1;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    overflow: hidden;
-  }
-
-  .editorial-image img {
-    width: 100%;
-    object-fit: contain;
-    display: block;
-    transform: translate(7px, -25px);
-    scale: 1.5;
-  }
-
-  /* Pre-owned grid */
-  .pre-owned {
-    background-color: var(--bg-color);
-  }
-
-  .condition-badge {
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: var(--on-surface-variant);
-    padding: 0.5rem 1rem;
-    background: var(--surface-container);
-    border-radius: 50px;
-  }
-
-  .preowned-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 2rem;
-  }
-
-  .spotlight-card {
-    grid-column: span 1;
-    background-color: var(--surface-container-low);
-    border-radius: var(--roundness);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    overflow: hidden;
-  }
-
-  .spotlight-info {
-    padding: 5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .spotlight-info h3 {
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .description {
-    font-size: 1rem;
-    color: var(--on-surface-variant);
-    line-height: 1.6;
-    margin-bottom: 2rem;
-  }
-
-  .spotlight-info .price {
-    font-size: 1.5rem;
-    margin-bottom: 3rem;
-  }
-
-  .spotlight-image img {
-    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.1));
-    max-height: 100%;
-  }
-
-  .secondary-products {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-  }
-
-  .mini {
-    flex-direction: row;
-    align-items: center;
-    padding: 1rem;
-    gap: 1.5rem;
-  }
-
-  .mini .card-image {
-    padding: 0;
-    width: 100px;
-    height: 100px;
-  }
-
-  .mini .card-image img {
-    max-height: 80px;
-  }
-
-  /* Contact Section */
-  .contact-section {
-    padding: 8rem 0;
-    background-color: var(--surface-container-low);
-  }
-
-  .contact-card {
-    background-color: var(--surface-container-lowest);
-    border-radius: var(--roundness);
-    padding: 5rem;
-    text-align: center;
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  .contact-info h2 {
-    font-size: 3rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .contact-info p {
-    font-size: 1.125rem;
-    color: var(--on-surface-variant);
-    margin-bottom: 4rem;
-    max-width: 600px;
-    margin-inline: auto;
-  }
-
-  .contact-methods {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4rem;
-  }
-
-  .whatsapp-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 1rem;
-    background-color: #25d366;
-    color: white;
-    padding: 1.5rem 3rem;
-    border-radius: var(--roundness);
-    font-weight: 700;
-    transition: all 0.3s ease;
-  }
-
-  .whatsapp-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 15px 30px rgba(37, 211, 102, 0.2);
-  }
-
-  .personal-consultation {
-    padding: 3rem;
-    border-top: 1px solid var(--surface-container-low);
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .personal-consultation a {
-    font-weight: 700;
-    color: var(--primary);
-  }
-
-  @media (max-width: 1024px) {
-    .hero-grid {
-      grid-template-columns: 1fr;
-      text-align: center;
-    }
-    .hero-content {
-      margin: 0 auto;
-    }
-    .hero-actions {
-      justify-content: center;
-    }
-    .arrivals-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    .editorial-card {
-      grid-column: span 2;
-    }
-    .preowned-grid {
-      grid-template-columns: 1fr;
-    }
-    .spotlight-card {
-      grid-template-columns: 1fr;
-    }
-    .spotlight-info {
-      padding: 3rem;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .badges-grid {
-      grid-template-columns: 1fr;
-    }
-    .arrivals-grid {
-      grid-template-columns: 1fr;
-    }
-    .editorial-card {
-      grid-column: span 1;
-    }
-    .contact-card {
-      padding: 2rem;
-    }
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
   }
 </style>

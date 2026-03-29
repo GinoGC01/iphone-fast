@@ -1,5 +1,6 @@
 ---
 import { siteConfig } from "../config";
+import "../styles/global.css";
 
 interface Props {
   title?: string;
@@ -21,8 +22,6 @@ const {
     <meta name="generator" content={Astro.generator} />
     <title>{title} | {siteConfig.siteTagline}</title>
     <meta name="description" content={description} />
-
-    <!-- Inter Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -30,27 +29,49 @@ const {
       rel="stylesheet"
     />
   </head>
-  <body>
+
+  <body
+    class="font-[Inter,system-ui,sans-serif] bg-[#f9f9fb] text-[#2d3338] antialiased scroll-smooth"
+  >
     <!-- Navigation Bar -->
-    <nav class="navbar">
-      <div class="nav-container">
-        <a href="/" class="logo">
-          <img src="/assets/logo.png" alt="Logo" class="logo-img" />
+    <nav
+      class="h-20 fixed top-0 left-0 right-0 z-[1000] bg-white backdrop-blur-xl border-b border-black/5 flex items-center"
+    >
+      <div
+        class="max-w-[1200px] w-full mx-auto px-8 flex justify-between items-center"
+      >
+        <a
+          href="/"
+          class="font-extrabold text-xl tracking-tight text-[#1c1c1e] flex items-center gap-3"
+        >
+          <img
+            src="/assets/logo.png"
+            alt="Logo"
+            class="h-10 w-10 object-contain"
+          />
           {siteConfig.siteName}
         </a>
 
-        <ul class="nav-links">
+        <ul class="hidden md:flex gap-10 list-none">
           {
             siteConfig.nav.links.map((link) => (
               <li>
-                <a href={link.href}>{link.name}</a>
+                <a
+                  href={link.href}
+                  class="text-sm font-medium text-[#596065] hover:text-[#1c1c1e] transition-colors duration-200 no-underline"
+                >
+                  {link.name}
+                </a>
               </li>
             ))
           }
         </ul>
 
-        <div class="nav-actions">
-          <button class="icon-btn" aria-label="Search">
+        <div class="flex gap-2">
+          <button
+            class="bg-transparent border-none text-[#1c1c1e] cursor-pointer p-2 rounded-full hover:bg-[#ebeef2] transition-colors duration-200"
+            aria-label="Search"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"
@@ -61,11 +82,15 @@ const {
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
-              ><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"
-              ></path></svg
             >
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.3-4.3"></path>
+            </svg>
           </button>
-          <button class="icon-btn" aria-label="Cart">
+          <button
+            class="bg-transparent border-none text-[#1c1c1e] cursor-pointer p-2 rounded-full hover:bg-[#ebeef2] transition-colors duration-200"
+            aria-label="Cart"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"
@@ -76,13 +101,13 @@ const {
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
-              ><circle cx="8" cy="21" r="1"></circle><circle
-                cx="19"
-                cy="21"
-                r="1"></circle><path
-                d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
-              ></path></svg
             >
+              <circle cx="8" cy="21" r="1"></circle>
+              <circle cx="19" cy="21" r="1"></circle>
+              <path
+                d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
+              ></path>
+            </svg>
           </button>
         </div>
       </div>
@@ -93,14 +118,15 @@ const {
     </main>
 
     <!-- Footer -->
-    <footer class="footer">
-      <div class="benefits-bar">
-        <div class="container">
-          <div class="benefits-grid">
+    <footer class="bg-white border-t border-[#ebeef2]">
+      <!-- Benefits Bar -->
+      <div class="py-16 border-b border-[#f2f4f6]">
+        <div class="max-w-[1200px] mx-auto px-4 lg:px-8">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
             {
               siteConfig.benefits.map((benefit) => (
-                <div class="benefit-item">
-                  <span class="benefit-icon">
+                <div class="flex flex-col items-center text-center gap-4">
+                  <span class="w-12 h-12 bg-[#f2f4f6] rounded-full flex items-center justify-center text-[#1c1c1e] shrink-0">
                     {benefit.icon === "truck" && (
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -177,7 +203,9 @@ const {
                       </svg>
                     )}
                   </span>
-                  <span class="benefit-text">{benefit.title}</span>
+                  <span class="text-sm font-semibold text-[#1c1c1e]">
+                    {benefit.title}
+                  </span>
                 </div>
               ))
             }
@@ -185,20 +213,32 @@ const {
         </div>
       </div>
 
-      <div class="footer-content container">
-        <div class="footer-bottom">
-          <p class="copyright">{siteConfig.footer.copyright}</p>
-          <div class="footer-links">
+      <!-- Footer Bottom -->
+      <div class="py-12 max-w-[1200px] mx-auto px-4 lg:px-8">
+        <div
+          class="flex flex-col md:flex-row justify-between items-center gap-6 flex-wrap"
+        >
+          <p class="text-xs text-[#596065]">{siteConfig.footer.copyright}</p>
+          <div class="flex flex-col md:flex-row gap-4 md:gap-8 items-center">
             {
               siteConfig.footer.legalLinks.map((link) => (
-                <a href={link.href}>{link.name}</a>
+                <a
+                  href={link.href}
+                  class="text-xs text-[#596065] hover:underline no-underline"
+                >
+                  {link.name}
+                </a>
               ))
             }
           </div>
-          <div class="social-links">
+          <div class="flex gap-6">
             {
               siteConfig.footer.socials.map((social) => (
-                <a href={social.href} aria-label={social.name}>
+                <a
+                  href={social.href}
+                  aria-label={social.name}
+                  class="text-xs text-[#596065] hover:text-[#1c1c1e] transition-colors no-underline"
+                >
                   {social.name}
                 </a>
               ))
@@ -209,17 +249,33 @@ const {
     </footer>
 
     <!-- WhatsApp Floating Button & Chat Window -->
-    <div class="whatsapp-wrapper">
-      <div class="whatsapp-chat-window" id="whatsappChat">
-        <div class="chat-header">
-          <div class="chat-admin">
-            <img src="/assets/logo.png" alt="Logo" class="chat-logo" />
-            <div class="admin-info">
-              <span class="admin-name">{siteConfig.siteName} Support</span>
-              <span class="admin-status">En línea</span>
+    <div class="fixed bottom-[30px] right-[30px] z-[1001]">
+      <!-- Chat Window -->
+      <div
+        class="whatsapp-chat-window absolute bottom-20 right-0 w-80 bg-white rounded-[20px] shadow-[0_20px_40px_rgba(0,0,0,0.15)] overflow-hidden border border-black/5"
+        id="whatsappChat"
+      >
+        <div
+          class="bg-[#1c1c1e] text-white px-6 py-5 flex justify-between items-center"
+        >
+          <div class="flex items-center gap-3">
+            <img
+              src="/assets/logo.png"
+              alt="Logo"
+              class="w-8 h-8 object-contain bg-white rounded-full p-0.5"
+            />
+            <div class="flex flex-col">
+              <span class="text-sm font-bold"
+                >{siteConfig.siteName} Support</span
+              >
+              <span class="text-[0.625rem] opacity-70">En línea</span>
             </div>
           </div>
-          <button class="close-chat" id="closeChat" aria-label="Cerrar chat">
+          <button
+            class="bg-transparent border-none text-white cursor-pointer opacity-70 hover:opacity-100 transition-opacity duration-200"
+            id="closeChat"
+            aria-label="Cerrar chat"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"
@@ -230,17 +286,26 @@ const {
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
-              ><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg
             >
+              <path d="M18 6 6 18"></path>
+              <path d="m6 6 12 12"></path>
+            </svg>
           </button>
         </div>
-        <div class="chat-body">
-          <p class="chat-msg">
+
+        <div class="p-6 bg-[#f7f9fb]">
+          <p
+            class="bg-white p-4 rounded-[0_15px_15px_15px] text-sm leading-relaxed shadow-sm"
+          >
             ¡Hola! 👋 Bienvenido al Iphone Fast. En qué podemos ayudarte hoy?
           </p>
         </div>
-        <div class="chat-footer">
-          <button class="chat-send-btn" id="sendWhatsApp">
+
+        <div class="px-6 pb-6 bg-[#f7f9fb]">
+          <button
+            class="w-full bg-[#25d366] text-white border-none py-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 cursor-pointer transition-all duration-300 hover:bg-[#1ebe57] hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(37,211,102,0.2)]"
+            id="sendWhatsApp"
+          >
             <span>Enviar mensaje</span>
             <svg
               width="16"
@@ -257,8 +322,9 @@ const {
         </div>
       </div>
 
+      <!-- Float Button -->
       <button
-        class="whatsapp-float"
+        class="wa-bounce-btn bg-[#25d366] w-[60px] h-[60px] rounded-full flex items-center justify-center shadow-[0_10px_25px_rgba(37,211,102,0.3)] border-none cursor-pointer transition-transform duration-300 hover:scale-110"
         id="whatsappBtn"
         aria-label="Abrir chat de WhatsApp"
       >
@@ -291,19 +357,15 @@ const {
       whatsappBtn.addEventListener("click", () => {
         whatsappChat.classList.toggle("active");
       });
-
       closeChat.addEventListener("click", () => {
         whatsappChat.classList.remove("active");
       });
-
       sendWhatsApp.addEventListener("click", () => {
         const cleanNumber = whatsappNumber.replace(/[^0-9]/g, "");
         const url = `https://wa.me/${cleanNumber}?text=${encodeURIComponent(whatsappMessage)}`;
         window.open(url, "_blank");
         whatsappChat.classList.remove("active");
       });
-
-      // Cerrar al hacer clic fuera
       document.addEventListener("click", (event) => {
         if (
           !whatsappChat.contains(event.target) &&
@@ -317,411 +379,28 @@ const {
 </html>
 
 <style is:global>
-  :root {
-    /* Design Tokens - Digital Atelier */
-    --bg-color: #f9f9fb;
-    --surface: #f9f9fb;
-    --surface-container: #ebeef2;
-    --surface-container-low: #f2f4f6;
-    --surface-container-lowest: #ffffff;
-    --surface-container-high: #e4e9ee;
-    --primary: #1c1c1e;
-    --on-primary: #faf7f9;
-    --on-surface: #2d3338;
-    --on-surface-variant: #596065;
-    --accent: #1c1c1e;
-
-    --font-main: "Inter", system-ui, -apple-system, sans-serif;
-    --roundness: 12px;
-    --spacing-unit: 8px;
-
-    --nav-height: 80px;
-    --container-width: 1200px;
-  }
-
+  /* Base resets not covered by Tailwind preflight */
   * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
   }
-
-  html,
-  body {
-    font-family: var(--font-main);
-    background-color: var(--bg-color);
-    color: var(--on-surface);
+  html {
     scroll-behavior: smooth;
-    -webkit-font-smoothing: antialiased;
   }
-
-  .container {
-    max-width: var(--container-width);
-    margin: 0 auto;
-    padding: 0 clamp(1rem, 5vw, 2rem);
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    color: var(--primary);
-    line-height: 1.1;
-    font-weight: 700;
-  }
-
   a {
     text-decoration: none;
     color: inherit;
-    transition: opacity 0.2s ease;
   }
-
   ul {
     list-style: none;
   }
-
   img {
     max-width: 100%;
     height: auto;
     display: block;
   }
 
-  /* Buttons */
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem 2rem;
-    border-radius: var(--roundness);
-    font-weight: 600;
-    font-size: 0.875rem;
-    letter-spacing: 0.05em;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
-    border: none;
-    text-transform: uppercase;
-  }
-
-  .btn-primary {
-    background-color: var(--primary);
-    color: var(--on-primary);
-  }
-
-  .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    opacity: 0.9;
-  }
-
-  .btn-secondary {
-    background-color: transparent;
-    color: var(--primary);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-  }
-
-  .btn-secondary:hover {
-    background-color: var(--surface-container-low);
-  }
-
-  /* Navbar */
-  .navbar {
-    height: var(--nav-height);
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    background: #ffffff;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    display: flex;
-    align-items: center;
-  }
-
-  .nav-container {
-    max-width: var(--container-width);
-    width: 100%;
-    margin: 0 auto;
-    padding: 0 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .logo {
-    font-weight: 800;
-    font-size: 1.25rem;
-    letter-spacing: -0.02em;
-    color: var(--primary);
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-
-  .logo-img {
-    height: 40px;
-    width: 40px;
-    object-fit: contain;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 2.5rem;
-  }
-
-  .nav-links a {
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--on-surface-variant);
-  }
-
-  .nav-links a:hover {
-    color: var(--primary);
-  }
-
-  .nav-actions {
-    display: flex;
-    gap: 1rem;
-  }
-
-  .icon-btn {
-    background: none;
-    border: none;
-    color: var(--primary);
-    cursor: pointer;
-    padding: 8px;
-    border-radius: 50%;
-    transition: background 0.2s ease;
-  }
-
-  .icon-btn:hover {
-    background: var(--surface-container);
-  }
-
-  /* Footer */
-  .footer {
-    background-color: var(--surface-container-lowest);
-    border-top: 1px solid var(--surface-container);
-  }
-
-  .benefits-bar {
-    padding: 4rem 0;
-    border-bottom: 1px solid var(--surface-container-low);
-  }
-
-  .benefits-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
-  }
-
-  .benefit-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 1rem;
-  }
-
-  .benefit-icon {
-    width: 48px;
-    height: 48px;
-    background-color: var(--surface-container-low);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--primary);
-  }
-
-  .benefit-text {
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: var(--primary);
-  }
-
-  .footer-content {
-    padding: 3rem 0;
-  }
-
-  .footer-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-  }
-
-  .copyright {
-    font-size: 0.75rem;
-    color: var(--on-surface-variant);
-  }
-
-  .footer-links {
-    display: flex;
-    gap: 2rem;
-  }
-
-  .footer-links a {
-    font-size: 0.75rem;
-    color: var(--on-surface-variant);
-  }
-
-  .footer-links a:hover {
-    text-decoration: underline;
-  }
-
-  .social-links {
-    display: flex;
-    gap: 1.5rem;
-  }
-
-  /* WhatsApp Chat Window */
-  .whatsapp-wrapper {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    z-index: 1001;
-  }
-
-  .whatsapp-float {
-    background-color: #25d366;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    animation: bounce 2s infinite;
-  }
-
-  .whatsapp-float:hover {
-    transform: scale(1.1);
-  }
-
-  .whatsapp-chat-window {
-    position: absolute;
-    bottom: 80px;
-    right: 0;
-    width: 320px;
-    background: #ffffff;
-    border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-    overflow: hidden;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(20px);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-  }
-
-  .whatsapp-chat-window.active {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
-
-  .chat-header {
-    background: var(--primary);
-    color: white;
-    padding: 1.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .chat-admin {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-
-  .chat-logo {
-    width: 32px;
-    height: 32px;
-    object-fit: contain;
-    background: white;
-    border-radius: 50%;
-    padding: 2px;
-  }
-
-  .admin-info {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .admin-name {
-    font-size: 0.875rem;
-    font-weight: 700;
-  }
-
-  .admin-status {
-    font-size: 0.625rem;
-    opacity: 0.7;
-  }
-
-  .close-chat {
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
-    opacity: 0.7;
-    transition: opacity 0.2s;
-  }
-
-  .close-chat:hover {
-    opacity: 1;
-  }
-
-  .chat-body {
-    padding: 1.5rem;
-    background: #f7f9fb;
-  }
-
-  .chat-msg {
-    background: white;
-    padding: 1rem;
-    border-radius: 0 15px 15px 15px;
-    font-size: 0.875rem;
-    line-height: 1.5;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
-  }
-
-  .chat-footer {
-    padding: 1rem 1.5rem 1.5rem;
-    background: #f7f9fb;
-  }
-
-  .chat-send-btn {
-    width: 100%;
-    background-color: #25d366;
-    color: white;
-    border: none;
-    padding: 1rem;
-    border-radius: 12px;
-    font-weight: 700;
-    font-size: 0.875rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-  .chat-send-btn:hover {
-    background-color: #1ebe57;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(37, 211, 102, 0.2);
-  }
-
-  @keyframes bounce {
+  /* Custom keyframes */
+  @keyframes wa-bounce {
     0%,
     100% {
       transform: translateY(0);
@@ -730,21 +409,20 @@ const {
       transform: translateY(-5px);
     }
   }
+  .wa-bounce-btn {
+    animation: wa-bounce 2s infinite;
+  }
 
-  @media (max-width: 768px) {
-    .nav-links {
-      display: none;
-    }
-    .benefits-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    .footer-bottom {
-      flex-direction: column;
-      text-align: center;
-    }
-    .footer-links {
-      flex-direction: column;
-      gap: 1rem;
-    }
+  /* WhatsApp chat toggle — requires JS .active class */
+  .whatsapp-chat-window {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .whatsapp-chat-window.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
   }
 </style>

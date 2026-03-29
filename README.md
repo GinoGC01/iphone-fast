@@ -1,46 +1,64 @@
-# Astro Starter Kit: Basics
+# 📱 iPhone Fast — The Digital Atelier
 
-```sh
-npm create astro@latest -- --template basics
+**iPhone Fast** es una landing page premium diseñada para una boutique de iPhones de alta gama, construida con **Astro 6** y siguiendo la filosofía de diseño **"The Digital Atelier"**.
+
+## ✨ Características Principales
+
+- **Diseño "Digital Atelier"**: Estética minimalista, monocromática y sin líneas divisorias rígidas, utilizando capas de color y desenfoques para jerarquizar el contenido.
+- **Arquitectura Basada en Datos**: Toda la información del sitio se gestiona desde un único archivo maestro (`src/config.js`). Cambiar un precio o un producto es tan fácil como editar un objeto JSON.
+- **WhatsApp Chat Experience**: Integración de una ventana de chat personalizada que mejora la conversión antes de redirigir al contacto directo.
+- **Glassmorphism & Animaciones**: Barra de navegación con efecto cristal y animaciones sutiles que aportan una sensación de lujo tecnológico.
+- **SEO Ready**: Estructura semántica completa para un posicionamiento óptimo.
+
+## 🚀 Inicio Rápido
+
+### 1. Clonar e Instalar
+```bash
+git clone https://github.com/GinoGC01/iphone-fast.git
+cd iphone-fast
+npm install
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+### 2. Desarrollo Local
+```bash
+npm run dev
+```
+La aplicación estará disponible en `http://localhost:4321`.
 
-## 🚀 Project Structure
+### 3. Construir para Producción
+```bash
+npm run build
+```
 
-Inside of your Astro project, you'll see the following folders and files:
+## ⚙️ Configuración
+
+Para personalizar el contenido del sitio, edita el archivo:
+`src/config.js`
+
+Aquí podrás modificar:
+- Nombre del sitio y SEO tags.
+- Número de WhatsApp y mensaje inicial.
+- Catálogo de productos (Novedades y Reacondicionados).
+- Secciones de beneficios y enlaces legales.
+
+## 📂 Estructura del Proyecto
 
 ```text
 /
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
+├── public/        # Recursos estáticos (Logos, Imágenes de productos)
+├── src/
+│   ├── layouts/   # Layout.astro (Design System & Tokens)
+│   ├── pages/     # index.astro (Página principal)
+│   └── config.js  # FUENTE DE VERDAD (Configuración maestra)
 └── package.json
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## 🎨 Design System
 
-## 🧞 Commands
+El proyecto utiliza variables CSS globales para tokens de diseño:
+- `--primary`: El tono oscuro de titanio para énfasis.
+- `--bg-color`: El tono claro de galería para fondos.
+- `--roundness`: Curvatura de 12px para una sensación moderna y suave.
 
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+---
+© 2026 iPhone Fast. Todos los derechos reservados.
